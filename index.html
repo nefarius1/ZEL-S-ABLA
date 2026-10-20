@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zeliş Abla Beni Affet ❤️</title>
+
+<!-- Konfeti efekti kütüphanesi -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffd1e8, #e5c7ff);
+  font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', Arial, sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+
+.kart {
+  background: white;
+  padding: 30px 20px;
+  margin: 16px;
+  border-radius: 25px;
+  box-shadow: 0 10px 35px #a65b8a55;
+  width: 420px;
+  max-width: calc(100% - 32px);
+  position: relative;
+  z-index: 1;
+}
+
+h1 { color: #ed4d94; margin-bottom: 5px; }
+h2 { color: #8a3b68; margin-top: 0; font-size: 20px; }
+p { color: #555; font-size: 18px; line-height: 1.4; }
+
+button {
+  border: 0;
+  padding: 14px 22px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 8px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.1s ease;
+}
+
+#evet { background: #ff65a3; color: white; }
+#evet:active { transform: scale(0.95); }
+#hayir { background: #eeeeee; color: #333; }
+
+#mesaj {
+  color: #ed4d94;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 18px;
+}
+</style>
+</head>
+<body>
+
+<div class="kart">
+  <div style="font-size:55px; line-height: 1.2;">&#129402;&#128151;</div>
+  <h1>Zeliş Abla</h1>
+  <h2>Lojmanı Affet...</h2>
+  <p>Bir cahillik yaptım abla.<br>Beni affeder misin?</p>
+
+  <button id="evet">Affettim ❤️</button>
+  <button id="hayir">Hayır 😭</button>
+
+  <div id="mesaj"></div>
+</div>
+
+<script>
+const hayir = document.getElementById("hayir");
+const mesaj = document.getElementById("mesaj");
+
+function kac() {
+  hayir.style.position = "fixed";
+  hayir.style.zIndex = "9999";
+
+  const maxX = Math.max(0, window.innerWidth - hayir.offsetWidth - 10);
+  const maxY = Math.max(0, window.innerHeight - hayir.offsetHeight - 10);
+
+  hayir.style.left = (5 + Math.random() * Math.max(0, maxX - 5)) + "px";
+  hayir.style.top = (5 + Math.random() * Math.max(0, maxY - 5)) + "px";
+}
+
+hayir.addEventListener("pointerdown", function(e) {
+  e.preventDefault();
+  kac();
+});
+
+hayir.addEventListener("mouseenter", kac);
+
+document.getElementById("evet").addEventListener("click", function() {
+  mesaj.textContent = "YAŞASIN! ZELİŞ ABLA AFFETTİ! ❤️🥹";
+  hayir.style.display = "none";
+
+  // Konfeti patlatma
+  confetti({
+    particleCount: 120,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+});
+</script>
+
+</body>
+</html>
